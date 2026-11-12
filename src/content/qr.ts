@@ -5,7 +5,7 @@ export const qrContent: Record<string, PageContent> = {
     title: "QR Code Generator: Free, No Expiry",
     description:
       "QR code generator for URLs, text, Wi-Fi, vCard, email, phone, SMS and WhatsApp. Free static codes, PNG and SVG download, no sign-up.",
-    h1: "Create a QR Code in Seconds",
+    h1: "Free QR Code Generator",
     intro:
       "Pick a type, enter your details and watch the code update live. Download it as a PNG or SVG. The codes are static, so they never expire and nothing is tracked.",
     steps: [

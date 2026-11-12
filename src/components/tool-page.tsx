@@ -15,6 +15,7 @@ const appCategory: Record<Tool["category"], string> = {
   qr: "UtilitiesApplication",
   finance: "FinanceApplication",
   ai: "MultimediaApplication",
+  text: "UtilitiesApplication",
 };
 
 /** Shared skeleton for every tool page: tool → how-to → guide → FAQ → related. */
@@ -29,36 +30,36 @@ export function ToolPage({ tool, content, children }: { tool: Tool; content: Pag
   const local = tool.category !== "finance";
 
   return (
-    <div className="container-x pt-6">
+    <div className="container-x pt-5">
       <Breadcrumbs items={crumbs} />
-      <div className="mt-6 grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px]">
+      <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_300px]">
         <div className="min-w-0">
-          <header className="max-w-[68ch]">
+          <header className="max-w-[60ch]">
             <h1 className="type-h1">{content.h1}</h1>
-            <p className="mt-3 text-[1.0625rem] text-muted">{content.intro}</p>
+            <p className="mt-4 text-[1.1875rem] leading-relaxed text-muted">{content.intro}</p>
             {local && (
-              <p className="mt-3 flex items-center gap-2 text-sm font-medium">
+              <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-surface px-3.5 py-1.5 text-sm font-medium shadow-(--shadow-card)">
                 <Icon name="lock" size={16} className="text-accent" />
                 Runs in your browser. Your files never leave your device.
               </p>
             )}
           </header>
 
-          <div className="mt-6">{children}</div>
+          <div className="mt-8">{children}</div>
 
           <div className="mt-8">
             <AdSlot variant="banner" />
           </div>
 
-          <div className="mt-12 space-y-14">
+          <div className="mt-16 space-y-16">
             <section aria-labelledby="how-to">
               <h2 id="how-to" className="type-h2">
                 {tool.name}: how to use it
               </h2>
-              <ol role="list" className="mt-4 grid gap-3 sm:grid-cols-2">
+              <ol role="list" className="mt-5 grid gap-3 sm:grid-cols-2">
                 {content.steps.map((s, i) => (
-                  <li key={s} className="flex gap-3">
-                    <span className="num flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border-strong text-sm font-semibold">
+                  <li key={s} className="card flex gap-3 p-4">
+                    <span className="num flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-sm font-semibold text-accent">
                       {i + 1}
                     </span>
                     <span className="pt-0.5">{s}</span>
@@ -101,7 +102,7 @@ export function ToolPage({ tool, content, children }: { tool: Tool; content: Pag
         </div>
 
         <aside className="hidden lg:block" aria-hidden="true">
-          <div className="sticky top-6">
+          <div className="sticky top-20">
             <AdSlot variant="sidebar" />
           </div>
         </aside>

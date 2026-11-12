@@ -44,7 +44,7 @@ export function ToolsMenu() {
       <button
         ref={btn}
         type="button"
-        className="btn-ghost"
+        className="btn-ghost min-h-9 px-3.5 text-sm"
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((o) => !o)}
@@ -56,7 +56,7 @@ export function ToolsMenu() {
         id={panelId}
         hidden={!open}
         data-open={open || undefined}
-        className="absolute inset-x-0 top-16 z-40 max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-border bg-surface shadow-[0_8px_24px_-12px_rgb(0_0_0/.25)]"
+        className="absolute inset-x-0 top-14 z-40 bg-bg max-h-[calc(100dvh-3.5rem)] overflow-y-auto border-b border-border/70 shadow-(--shadow-lift)"
       >
         {open && (
         <nav aria-label="All tools" className="container-x grid gap-8 py-8 sm:grid-cols-2 lg:grid-cols-5">

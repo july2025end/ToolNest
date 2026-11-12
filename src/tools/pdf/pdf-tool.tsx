@@ -2,13 +2,12 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { PDFDocumentProxy } from "pdfjs-dist";
-import type { PDFPage } from "pdf-lib";
 import { Icon } from "@/components/icons";
 import type { ToolProps } from "@/components/tool-renderer";
 import { trackToolUse } from "@/lib/supabase";
 import { Dropzone } from "../shared/dropzone";
 import { downloadBlob, formatBytes, safeName, zipBlobs } from "../shared/files";
-import { canvasBlob, openForEdit, openForRender, parseRanges, PDF_MAX, pdfBlob, renderPage } from "../shared/pdf";
+import { canvasBlob, openForEdit, openForRender, parseRanges, PDF_MAX, pdfBlob, pageView, renderPage } from "../shared/pdf";
 import { move, useDragSort } from "../shared/sortable";
 import { Choice, ErrorText, Field, IntInput, Panel, Progress, Section } from "../shared/ui";
 
@@ -31,7 +30,7 @@ const actionLabel: Record<PdfMode, string> = {
   "to-images": "Convert to images",
 };
 
-export default function PdfTool({ slug, mode }: ToolProps & { mode: string }) {
+export default function PdfTool({ slug, mode, preset }: ToolProps & { mode: string }) {
   const m = mode as PdfMode;
   const [file, setFile] = useState<File | null>(null);
   const [pageCount, setPageCount] = useState(0);
@@ -60,7 +59,7 @@ export default function PdfTool({ slug, mode }: ToolProps & { mode: string }) {
     wmColor: "#888888",
     dpi: 150,
     quality: 0.85,
-    imgType: "image/jpeg" as "image/jpeg" | "image/png",
+    imgType: ((preset as { imgType?: "image/png" } | undefined)?.imgType ?? "image/jpeg") as "image/jpeg" | "image/png",
   });
   const set = <K extends keyof typeof opt>(k: K, v: (typeof opt)[K]) => {
     setOpt((o) => ({ ...o, [k]: v }));
@@ -506,24 +505,6 @@ export default function PdfTool({ slug, mode }: ToolProps & { mode: string }) {
       <ErrorText>{error}</ErrorText>
     </Panel>
   );
-}
-
-/**
- * The page as a reader sees it: visible (crop box) size after the page's /Rotate is applied.
- * `at(x, y)` turns a point measured from the visible bottom-left corner into PDF coordinates;
- * text drawn there must also be rotated by `rotation` to read upright.
- */
-function pageView(p: PDFPage) {
-  const box = p.getCropBox();
-  const rotation = (((p.getRotation().angle % 360) + 360) % 360) as 0 | 90 | 180 | 270;
-  const W = box.width;
-  const H = box.height;
-  const sideways = rotation === 90 || rotation === 270;
-  const at = (u: number, v: number) => {
-    const [x, y] = rotation === 90 ? [W - v, u] : rotation === 180 ? [W - u, H - v] : rotation === 270 ? [v, H - u] : [u, v];
-    return { x: box.x + x, y: box.y + y };
-  };
-  return { width: sideways ? H : W, height: sideways ? W : H, rotation, at };
 }
 
 function Thumb({ interactive, onClick, pressed, label, className, children }: { interactive: boolean; onClick: () => void; pressed: boolean; label: string; className: string; children: ReactNode }) {

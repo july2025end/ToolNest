@@ -21,6 +21,13 @@ type Item = {
 const EXTS = ["jpg", "jpeg", "png", "webp", "heic", "heif"];
 const ACCEPT = "image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif";
 const TARGETS = [20, 50, 100, 200, 500];
+const SIZES = [
+  { label: "Instagram 1080×1080", w: 1080, h: 1080 },
+  { label: "Full HD 1920×1080", w: 1920, h: 1080 },
+  { label: "YouTube 1280×720", w: 1280, h: 720 },
+  { label: "Web 1200 wide", w: 1200, h: null },
+  { label: "Email 800 wide", w: 800, h: null },
+];
 let nextId = 1;
 
 export default function ImageTool({ slug, preset }: ToolProps) {
@@ -31,7 +38,7 @@ export default function ImageTool({ slug, preset }: ToolProps) {
     mode: p.targetKB ? "target" : "quality",
     quality: 0.75,
     targetKB: p.targetKB ?? 100,
-    resize: "none",
+    resize: p.resize ?? "none",
     width: null,
     height: null,
     lock: true,
@@ -171,6 +178,15 @@ export default function ImageTool({ slug, preset }: ToolProps) {
                 { value: "percent", label: "Percentage" },
               ]}
             />
+            {o.resize === "size" && (
+              <div className="flex flex-wrap gap-2" aria-label="Common sizes">
+                {SIZES.map((z) => (
+                  <button key={z.label} type="button" className="chip" aria-pressed={o.width === z.w && o.height === z.h} onClick={() => setO((prev) => ({ ...prev, width: z.w, height: z.h }))}>
+                    {z.label}
+                  </button>
+                ))}
+              </div>
+            )}
             {o.resize === "size" && (
               <div className="flex flex-wrap items-end gap-3">
                 <Field label="Width (px)" htmlFor="w">

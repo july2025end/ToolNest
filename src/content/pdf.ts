@@ -155,7 +155,7 @@ export const pdfContent: Record<string, PageContent> = {
     title: "Extract Pages From a PDF, Free Online",
     description:
       "Extract pages from a PDF into a new file. Choose pages or ranges, free, in your browser, with no upload and no watermark.",
-    h1: "Pull Selected Pages Out of a PDF",
+    h1: "Extract Pages From a PDF",
     intro:
       "Pick the pages you need, from a single page to a scattered list, and save them as a new PDF. The original file is left untouched.",
     steps: [
@@ -228,7 +228,7 @@ export const pdfContent: Record<string, PageContent> = {
     title: "Delete Pages From a PDF, Free Online",
     description:
       "Delete pages from a PDF and save a clean copy. Free, in your browser, with no upload, no sign-up and no watermark on the result.",
-    h1: "Remove Unwanted Pages From a PDF",
+    h1: "Delete Pages From a PDF",
     intro:
       "Strike out blank sheets, old covers or private pages and download the cleaned PDF. Your original stays safe on your device.",
     steps: [
@@ -674,7 +674,7 @@ export const pdfContent: Record<string, PageContent> = {
     title: "Add Page Numbers to a PDF, Free Online",
     description:
       "Add page numbers to a PDF. Pick the position, start number and format like Page 1 of N. Free, in-browser, with no upload or watermark.",
-    h1: "Number the Pages of Your PDF",
+    h1: "Add Page Numbers to a PDF",
     intro:
       "Stamp page numbers onto every page of a PDF, choosing where they sit, where numbering starts and how they read.",
     steps: [
@@ -748,7 +748,7 @@ export const pdfContent: Record<string, PageContent> = {
     title: "Add a Text Watermark to PDF, Free Online",
     description:
       "Add a text watermark to every page of a PDF. Set text, size and opacity, with a diagonal layout. Free, in-browser, with no upload.",
-    h1: "Put a Text Watermark on Your PDF",
+    h1: "Add a Watermark to a PDF",
     intro:
       "Mark each page with words like CONFIDENTIAL or DRAFT. Choose the size and opacity, and the watermark runs diagonally across the page.",
     steps: [

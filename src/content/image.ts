@@ -78,7 +78,7 @@ export const imageContent: Record<string, PageContent> = {
     title: "Compress Image to 100KB Online, Free",
     description:
       "Compress an image to 100KB online. The tool finds the right quality for you, runs free in your browser and never uploads your photo.",
-    h1: "Reduce Image Size to 100 KB or Less",
+    h1: "Compress an Image to 100 KB or Less",
     intro:
       "Choose the 100 KB target and the tool searches for the highest quality that still fits under the limit. Your photo stays on your device the whole time.",
     steps: [
@@ -158,7 +158,7 @@ export const imageContent: Record<string, PageContent> = {
     title: "Compress Image to 50KB Online, Free",
     description:
       "Compress an image to 50KB for forms and portals. Automatic quality search, free, runs in your browser with no upload or watermark.",
-    h1: "Make an Image 50 KB or Smaller",
+    h1: "Compress an Image to 50 KB or Smaller",
     intro:
       "Many exam and job portals set a 50 KB ceiling for photos. Use the 50 KB preset to get a clear result under that limit without trial and error.",
     steps: [
@@ -237,7 +237,7 @@ export const imageContent: Record<string, PageContent> = {
     title: "Compress Image to 20KB Online, Free",
     description:
       "Compress an image to 20KB for signature and photo fields. Free, runs in your browser, and your file is never uploaded anywhere.",
-    h1: "Shrink an Image to 20 KB",
+    h1: "Compress an Image to 20 KB",
     intro:
       "Twenty kilobytes is a tight limit, often used for signature and thumbnail fields. The 20 KB preset reduces quality and size together until the file fits.",
     steps: [

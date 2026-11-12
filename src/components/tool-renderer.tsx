@@ -12,6 +12,12 @@ const pdf = (mode: string) => {
   return Wrapped;
 };
 
+const qpdf = (mode: "unlock" | "protect" | "flatten") => {
+  const C = dynamic(() => import("@/tools/pdf/qpdf-tool"));
+  const Wrapped = (p: ToolProps) => <C {...p} mode={mode} />;
+  return Wrapped;
+};
+
 const registry: Record<ToolKind, ComponentType<ToolProps>> = {
   image: dynamic(() => import("@/tools/image/image-tool")),
   "pdf-merge": dynamic(() => import("@/tools/pdf/merge-tool")),
@@ -32,6 +38,31 @@ const registry: Record<ToolKind, ComponentType<ToolProps>> = {
   "calc-percentage": dynamic(() => import("@/tools/finance/percentage")),
   "calc-discount": dynamic(() => import("@/tools/finance/discount")),
   "bg-remove": dynamic(() => import("@/tools/bg/bg-tool")),
+  "image-crop": dynamic(() => import("@/tools/image/crop-tool")),
+  "pdf-sign": dynamic(() => import("@/tools/pdf/sign-tool")),
+  "calc-age": dynamic(() => import("@/tools/finance/age")),
+  "calc-bmi": dynamic(() => import("@/tools/finance/bmi")),
+  "text-count": dynamic(() => import("@/tools/text/word-counter")),
+  "text-case": dynamic(() => import("@/tools/text/case-converter")),
+  "text-password": dynamic(() => import("@/tools/text/password")),
+  "image-passport": dynamic(() => import("@/tools/image/passport-tool")),
+  "image-redact": dynamic(() => import("@/tools/image/redact-tool")),
+  "image-ocr": dynamic(() => import("@/tools/image/ocr-tool")),
+  "image-colors": dynamic(() => import("@/tools/image/color-tool")),
+  "image-text": dynamic(() => import("@/tools/image/text-tool")),
+  "pdf-unlock": qpdf("unlock"),
+  "pdf-protect": qpdf("protect"),
+  "pdf-flatten": qpdf("flatten"),
+  "pdf-metadata": dynamic(() => import("@/tools/pdf/metadata-tool")),
+  barcode: dynamic(() => import("@/tools/qr/barcode-tool")),
+  "qr-scan": dynamic(() => import("@/tools/qr/scan-tool")),
+  "calc-tip": dynamic(() => import("@/tools/finance/tip")),
+  "calc-gpa": dynamic(() => import("@/tools/finance/gpa")),
+  "calc-units": dynamic(() => import("@/tools/finance/unit")),
+  "calc-timezone": dynamic(() => import("@/tools/finance/timezone")),
+  "text-json": dynamic(() => import("@/tools/text/json")),
+  "text-base64": dynamic(() => import("@/tools/text/base64")),
+  "text-lorem": dynamic(() => import("@/tools/text/lorem")),
 };
 
 export function ToolRenderer({ tool }: { tool: Tool }) {

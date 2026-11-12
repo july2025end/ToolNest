@@ -1,12 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { InlineScript } from "@/components/inline-script";
 import { site } from "@/site.config";
 import "./globals.css";
-
-const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -16,12 +13,14 @@ export const metadata: Metadata = {
   openGraph: { type: "website", siteName: site.name, locale: "en_US" },
   twitter: { card: "summary_large_image" },
   formatDetection: { telephone: false },
+  // Google Search Console HTML-tag verification; set the token in the environment.
+  verification: process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : undefined,
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafaf7" },
-    { media: "(prefers-color-scheme: dark)", color: "#121311" },
+    { media: "(prefers-color-scheme: light)", color: "#f5f5f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
 };
 
@@ -30,14 +29,14 @@ const themeScript = `try{var t=localStorage.getItem("theme");var d=t?t==="dark":
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={figtree.variable} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <InlineScript html={themeScript} />
       </head>
       <body className="flex min-h-dvh flex-col antialiased">
         <a
           href="#main"
-          className="sr-only z-50 rounded-md bg-accent px-4 py-3 font-semibold text-accent-fg focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+          className="sr-only z-50 rounded-full bg-accent px-5 py-3 font-semibold text-accent-fg focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
         >
           Skip to content
         </a>

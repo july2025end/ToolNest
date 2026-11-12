@@ -1,6 +1,60 @@
 import type { PageContent } from "./types";
 
 export const hubContent: Record<string, PageContent> = {
+  "image-tools": {
+    title: "Free Image Tools: Compress, Convert, Resize",
+    description:
+      "Free image tools that run in your browser: compress to 100KB, 50KB or 20KB, convert HEIC, PNG, WebP and JPG, and resize. No upload, no sign-up.",
+    h1: "Free Online Image Tools",
+    intro:
+      "Compress, convert and resize photos without installing anything. Every tool runs in your browser, so your pictures stay on your device.",
+    steps: [
+      "Pick the tool that matches your task from the list.",
+      "Add up to 20 images (JPG, PNG, WebP or HEIC, 25 MB each) and set the options.",
+      "Download each image, or all of them as one ZIP. Nothing is uploaded.",
+    ],
+    guide: [
+      {
+        heading: "Which image tool should you use?",
+        paragraphs: [
+          "If a file is simply too big, use the image compressor and move the quality slider until the size looks right. If a website or form sets a hard limit, use the exact-size tools instead: compress image to 100KB, 50KB or 20KB find the best quality that still fits.",
+          "If a file will not open, it is usually the format. HEIC to JPG fixes iPhone photos that Windows or a website will not accept. PNG to JPG makes screenshots and graphics much smaller, JPG to PNG gives you a lossless copy for editing, and WebP to JPG turns images saved from the web into a format every app understands.",
+        ],
+      },
+      {
+        heading: "Getting the smallest file without a visible loss",
+        paragraphs: [
+          "For photos, a quality of 75 to 80 percent is usually impossible to tell apart from the original while cutting the size by half or more. Resizing helps even more: a phone photo is often 4000 pixels wide, while most websites and forms show it at 1200 pixels or less.",
+          "Converting to WebP gives the smallest files for websites. Use JPG when the image is going into an email, a document or a form, because every program accepts it.",
+        ],
+      },
+      {
+        heading: "Why these tools run in your browser",
+        paragraphs: [
+          "Photos can hold more than the picture: location, the date and the phone model are often stored inside the file. Here the work is done by code running on your own device, so your images never travel to a server, and location and camera details are removed from the output automatically.",
+          "The trade-off is that your device does the work. Large batches may take a little longer on an older phone.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Are these image tools really free?",
+        a: "Yes. There is no sign-up, no daily limit and no watermark on your images.",
+      },
+      {
+        q: "Are my photos uploaded to a server?",
+        a: "No. All processing happens in your browser on your own device.",
+      },
+      {
+        q: "Which formats are supported?",
+        a: "You can add JPG, PNG, WebP and HEIC images, up to 20 at a time and 25 MB each.",
+      },
+      {
+        q: "Do the tools remove location data from photos?",
+        a: "Yes. Location and camera details (EXIF and GPS) are removed from every image you download.",
+      },
+    ],
+  },
   "pdf-tools": {
     title: "Free PDF Tools: Merge, Split, Compress",
     description:

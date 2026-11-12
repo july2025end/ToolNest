@@ -27,7 +27,7 @@ export function ToolSearch() {
   return (
     <form
       role="search"
-      className="relative max-w-xl"
+      className="relative mx-auto max-w-xl"
       onSubmit={(e) => {
         e.preventDefault();
         if (results[0]) router.push(`/${results[0].t.slug}`);
@@ -37,7 +37,7 @@ export function ToolSearch() {
       <label htmlFor="tool-search" className="sr-only">
         Search tools
       </label>
-      <Icon name="search" className="pointer-events-none absolute top-[15px] left-4 text-muted" />
+      <Icon name="search" className="pointer-events-none absolute top-[19px] left-5 text-muted" />
       <input
         id="tool-search"
         type="search"
@@ -49,14 +49,14 @@ export function ToolSearch() {
         placeholder="Search tools, e.g. merge pdf, heic, emi"
         autoComplete="off"
         aria-controls={listId}
-        className="field h-[52px] rounded-md pl-12 text-base"
+        className="field h-14 rounded-full border-transparent bg-surface pl-12 text-base shadow-(--shadow-card) hover:border-transparent"
       />
       <p className="sr-only" aria-live="polite">
         {q ? `${results.length} tool${results.length === 1 ? "" : "s"} found` : ""}
       </p>
       <div id={listId}>
         {q && (
-          <ul className="absolute inset-x-0 top-[58px] z-20 overflow-hidden rounded-md border border-border bg-surface shadow-[0_8px_24px_-12px_rgb(0_0_0/.25)]">
+          <ul className="absolute inset-x-0 top-[64px] z-20 overflow-hidden rounded-md bg-surface py-1 text-left shadow-(--shadow-lift)">
             {results.length ? (
               results.map(({ t }) => (
                 <li key={t.slug}>

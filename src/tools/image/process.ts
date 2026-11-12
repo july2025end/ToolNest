@@ -68,7 +68,14 @@ function draw(img: ImageBitmap, w: number, h: number, type: string) {
 }
 
 const encode = (c: HTMLCanvasElement, type: string, q?: number) =>
-  new Promise<Blob>((res, rej) => c.toBlob((b) => (b ? res(b) : rej(new Error("Encoding failed. The image may be too large for this device."))), type, q));
+  new Promise<Blob>((res, rej) =>
+    c.toBlob((b) => {
+      if (!b) return rej(new Error("Encoding failed. The image may be too large for this device."));
+      // Safari can't encode WebP and silently returns a PNG instead.
+      if (b.type !== type) return rej(new Error("This browser can't save WebP images (Safari doesn't support it yet). Choose JPG or PNG, or use Chrome, Edge or Firefox."));
+      res(b);
+    }, type, q),
+  );
 
 /** Re-encodes the image. Re-encoding through canvas drops EXIF/GPS metadata. */
 export async function processImage(file: File, o: ImageOptions) {

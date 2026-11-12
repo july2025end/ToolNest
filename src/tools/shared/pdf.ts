@@ -1,3 +1,4 @@
+import type { PDFPage } from "pdf-lib";
 import type { PDFDocumentProxy } from "pdfjs-dist";
 
 export const PDF_MAX = 100 * 1024 * 1024;
@@ -26,10 +27,10 @@ export async function openForRender(bytes: ArrayBuffer): Promise<PDFDocumentProx
 }
 
 /** pdf-lib document, with a clear message for encrypted or broken files. */
-export async function openForEdit(bytes: ArrayBuffer) {
+export async function openForEdit(bytes: ArrayBuffer, opts?: { updateMetadata?: boolean }) {
   const { PDFDocument } = await import("pdf-lib");
   try {
-    const doc = await PDFDocument.load(bytes);
+    const doc = await PDFDocument.load(bytes, opts);
     // pdf-lib parses broken files leniently and only fails later; touch the page tree now
     // so a damaged file gets the friendly message instead of a raw JS error.
     if (doc.getPageCount() < 1) throw new Error("no pages");
@@ -83,3 +84,21 @@ export function parseRanges(input: string, pageCount: number): number[][] {
 }
 
 export const pdfBlob = (bytes: Uint8Array) => new Blob([bytes as BlobPart], { type: "application/pdf" });
+
+/**
+ * The page as a reader sees it: visible (crop box) size after the page's /Rotate is applied.
+ * `at(x, y)` turns a point measured from the visible bottom-left corner into PDF coordinates;
+ * text drawn there must also be rotated by `rotation` to read upright.
+ */
+export function pageView(p: PDFPage) {
+  const box = p.getCropBox();
+  const rotation = (((p.getRotation().angle % 360) + 360) % 360) as 0 | 90 | 180 | 270;
+  const W = box.width;
+  const H = box.height;
+  const sideways = rotation === 90 || rotation === 270;
+  const at = (u: number, v: number) => {
+    const [x, y] = rotation === 90 ? [W - v, u] : rotation === 180 ? [W - u, H - v] : rotation === 270 ? [v, H - u] : [u, v];
+    return { x: box.x + x, y: box.y + y };
+  };
+  return { width: sideways ? H : W, height: sideways ? W : H, rotation, at };
+}

@@ -19,7 +19,8 @@ const csp = [
   "frame-ancestors 'none'",
   "frame-src 'none'",
   "manifest-src 'self'",
-  "upgrade-insecure-requests",
+  // Over plain http (e.g. a LAN/Tailscale IP) this makes browsers request assets via https and break the page.
+  ...(process.env.FORCE_HTTPS === "1" ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
 
 const securityHeaders = [
@@ -31,7 +32,7 @@ const securityHeaders = [
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+    value: "camera=(self), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
   },
 ];
 

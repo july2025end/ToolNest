@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Icon } from "@/components/icons";
 import { JsonLd } from "@/components/json-ld";
 import { ToolList } from "@/components/tool-list";
 import { ToolSearch } from "@/components/tool-search";
@@ -48,77 +49,84 @@ export default async function Home() {
         ]}
       />
 
-      <section className="border-b border-border">
-        <div className="container-x py-14 sm:py-20">
-          <h1 className="h-display max-w-[20ch]">Everyday file and money tools that never upload your files</h1>
-          <p className="mt-4 max-w-[56ch] text-[1.0625rem] text-muted">
-            Compress and convert images, edit PDFs, make QR codes and work out loan payments. It all happens in your
-            browser, so it&rsquo;s fast and private.
-          </p>
-          <div className="mt-8">
-            <ToolSearch />
-          </div>
-          <ul className="mt-6 flex flex-wrap gap-2" aria-label="Categories">
-            {categories.map((c) => (
-              <li key={c.id}>
-                <Link href={`#${c.id}`} className="chip">
-                  {c.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+      <section className="container-x pt-16 pb-12 text-center sm:pt-24 sm:pb-16">
+        <h1 className="h-display mx-auto max-w-[18ch]">Free online tools for images, PDFs and more.</h1>
+        <p className="mx-auto mt-5 max-w-[52ch] text-[1.1875rem] leading-relaxed text-muted sm:text-[1.3125rem]">
+          Compress images, edit PDFs, make QR codes and work out loan payments. Free, no sign-up, and your files never
+          leave your device.
+        </p>
+        <div className="mt-10">
+          <ToolSearch />
         </div>
+        <ul className="mt-6 flex flex-wrap justify-center gap-2" aria-label="Categories">
+          {categories.map((c) => (
+            <li key={c.id}>
+              <Link href={`#${c.id}`} className="chip">
+                {c.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      <section className="container-x pt-14" aria-labelledby="popular">
+      <section className="container-x pt-4" aria-labelledby="popular">
         <h2 id="popular" className="type-h2">
           Popular tools
         </h2>
-        <div className="mt-4">
+        <div className="mt-5">
           <ToolList tools={popular} cols={3} />
         </div>
       </section>
 
-      <section className="container-x pt-16" aria-labelledby="all-tools">
+      <section className="container-x pt-20" aria-labelledby="all-tools">
         <h2 id="all-tools" className="type-h2">
           All tools
         </h2>
-        <div className="mt-2 divide-y divide-border">
+        <div className="mt-6 space-y-12">
           {categories.map((c) => (
-            <div key={c.id} id={c.id} className="grid scroll-mt-6 gap-4 py-8 md:grid-cols-[220px_minmax(0,1fr)]">
-              <div>
-                <h3 className="type-h3">
-                  <Link href={c.href} className="hover:text-accent">
-                    {c.name}
-                  </Link>
-                </h3>
-                <p className="mt-1 text-sm text-muted">{c.blurb}</p>
+            <div key={c.id} id={c.id} className="scroll-mt-20">
+              <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <div>
+                  <h3 className="text-[1.25rem] font-semibold tracking-[-0.015em]">{c.name}</h3>
+                  <p className="mt-0.5 text-sm text-muted">{c.blurb}</p>
+                </div>
+                <Link href={c.href} className="link inline-flex min-h-11 items-center text-[0.9375rem]">
+                  See all
+                </Link>
               </div>
-              <ToolList tools={toolsIn(c.id)} cols={2} />
+              <ToolList tools={toolsIn(c.id)} cols={3} />
             </div>
           ))}
         </div>
       </section>
 
-      <section className="container-x pt-8" aria-labelledby="why">
-        <div className="grid gap-6 border-t border-border pt-10 md:grid-cols-[220px_minmax(0,1fr)]">
-          <h2 id="why" className="type-h2">
-            Why {site.name}
+      <section className="container-x pt-24" aria-labelledby="why">
+        <div className="rounded-lg bg-surface px-6 py-12 text-center shadow-(--shadow-card) sm:px-12 sm:py-16">
+          <h2 id="why" className="type-h1 mx-auto max-w-[20ch]">
+            Private by design. Free for good.
           </h2>
-          <div className="prose-x text-muted">
-            <p>
-              <strong className="text-text">Your files stay on your device.</strong> Images, PDFs and photos are processed
-              by your own browser, so there is no upload, no server copy and nothing for us to lose. You can even switch off
-              your connection once a tool has loaded.
-            </p>
-            <p>
-              <strong className="text-text">Free, with no account.</strong> There are no daily limits and no watermarks
-              stamped on your work. Open a tool, finish the job, close the tab.{" "}
-              <Link href="/privacy" className="link">
-                How we handle privacy
-              </Link>
-            </p>
-          </div>
+          <ul role="list" className="mx-auto mt-12 grid max-w-4xl gap-10 text-left sm:grid-cols-3 sm:text-center">
+            {[
+              { icon: "lock" as const, title: "Your files stay with you", body: "Images, PDFs and photos are processed by your own browser. Nothing is uploaded, so nothing can leak." },
+              { icon: "free" as const, title: "Free, with no account", body: "No daily limits, no watermarks, no sign-up. Open a tool, finish the job, close the tab." },
+              { icon: "device" as const, title: "Works on any device", body: "Phone, tablet or computer. Once a tool has loaded, it keeps working even offline." },
+            ].map((f) => (
+              <li key={f.title} className="flex gap-4 sm:flex-col sm:items-center">
+                <span className="icon-badge">
+                  <Icon name={f.icon} size={22} />
+                </span>
+                <span>
+                  <span className="block font-semibold">{f.title}</span>
+                  <span className="mt-1 block text-[0.9375rem] text-muted">{f.body}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-10">
+            <Link href="/privacy" className="link">
+              How we handle privacy
+            </Link>
+          </p>
         </div>
       </section>
     </>

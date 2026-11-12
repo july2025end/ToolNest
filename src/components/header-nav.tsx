@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { categories, toolBySlug } from "@/lib/tools";
 
-const labels: Record<string, string> = { image: "Images", pdf: "PDF", qr: "QR codes", finance: "Calculators", ai: "Background remover" };
+const labels: Record<string, string> = { image: "Images", pdf: "PDF", qr: "QR & barcodes", finance: "Calculators", ai: "Background remover", text: "Text" };
 
 export function HeaderNav() {
   const path = usePathname();
@@ -18,7 +18,7 @@ export function HeaderNav() {
             key={c.id}
             href={c.href}
             aria-current={path === c.href ? "page" : undefined}
-            className={`flex min-h-11 items-center rounded-sm px-3 text-[0.9375rem] font-medium hover:text-text ${active ? "text-text underline decoration-accent decoration-2 underline-offset-[6px]" : "text-muted"}`}
+            className={`flex min-h-9 items-center rounded-full px-3.5 text-sm hover:text-text ${active ? "bg-surface-2 font-medium text-text" : "text-muted"}`}
           >
             {labels[c.id]}
           </Link>

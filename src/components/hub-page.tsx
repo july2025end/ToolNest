@@ -17,9 +17,9 @@ export function HubPage({ slug, category, name }: { slug: string; category: Cate
   return (
     <div className="container-x pt-6">
       <Breadcrumbs items={[{ name, href: `/${slug}` }]} />
-      <header className="mt-6 max-w-[68ch]">
+      <header className="mt-8 max-w-[60ch]">
         <h1 className="type-h1">{c.h1}</h1>
-        <p className="mt-3 text-[1.0625rem] text-muted">{c.intro}</p>
+        <p className="mt-4 text-[1.1875rem] leading-relaxed text-muted">{c.intro}</p>
       </header>
       <div className="mt-8">
         <ToolList tools={toolsIn(category)} cols={3} />
@@ -27,15 +27,15 @@ export function HubPage({ slug, category, name }: { slug: string; category: Cate
       <div className="mt-10">
         <AdSlot variant="banner" />
       </div>
-      <div className="mt-12 space-y-14">
+      <div className="mt-16 space-y-16">
         <section aria-labelledby="how">
           <h2 id="how" className="type-h2">
             How it works
           </h2>
-          <ol role="list" className="mt-4 grid gap-3 sm:grid-cols-3">
+          <ol role="list" className="mt-5 grid gap-3 sm:grid-cols-3">
             {c.steps.map((s, i) => (
-              <li key={s} className="flex gap-3">
-                <span className="num flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border-strong text-sm font-semibold">{i + 1}</span>
+              <li key={s} className="card flex gap-3 p-4">
+                <span className="num flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-sm font-semibold text-accent">{i + 1}</span>
                 <span className="pt-0.5">{s}</span>
               </li>
             ))}
