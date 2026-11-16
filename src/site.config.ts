@@ -2,8 +2,8 @@
 export const site = {
   name: "ToolNest",
   maker: "WeTwo",
-  // Set NEXT_PUBLIC_SITE_URL to the live domain: canonicals, sitemap, robots and share images all use it.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
+  // Live domain (override with NEXT_PUBLIC_SITE_URL): canonicals, sitemap, robots, JSON-LD and share images all use it.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://tool.wetwo.tech",
   tagline: "Free online tools that run in your browser",
   description:
     "Free image, PDF, QR code and finance tools. No sign-up, no watermarks, and your files never leave your device.",
