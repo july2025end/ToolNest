@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   title: { default: `${site.name}: ${site.tagline}`, template: `%s | ${site.name}` },
   description: site.description,
   applicationName: site.name,
+  // Name under the home-screen icon on iPhone/iPad (otherwise iOS uses the long page title).
+  appleWebApp: { title: site.name },
   openGraph: { type: "website", siteName: site.name, locale: "en_US" },
   twitter: { card: "summary_large_image" },
   formatDetection: { telephone: false },
